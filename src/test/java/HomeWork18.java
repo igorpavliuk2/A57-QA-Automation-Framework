@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 @Test(description="Play song test")
 public class HomeWork18 extends BaseTest{
     public void playSong(){
-        openUrl();
         login();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         WebElement playNextSongButton = driver.findElement(By.cssSelector("i[data-testid='play-next-btn']"));
