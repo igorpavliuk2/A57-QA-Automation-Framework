@@ -5,22 +5,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 import java.util.UUID;
 
 public class BaseTest {
     public WebDriver driver = null;
+    public WebDriverWait wait = null;
     public String url = "https://qa.koel.app/";
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
+    @Parameters({"BaseURL"})
     @BeforeMethod
-    public void launchBrowser() {
+    public void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
@@ -30,14 +34,14 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        driver.get(BaseURL);
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
     }
     @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
-    public void openUrl (){
-        driver.get(url);
-    }
+
     public void login(){
         WebElement loginField = driver.findElement(By.cssSelector("input[type='email']"));
         loginField.sendKeys("igor.pavliuk@testpro.io");

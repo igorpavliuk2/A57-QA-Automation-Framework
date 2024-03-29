@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 @Test(description = "Test adding song to the playlist")
 public class HomeWork17 extends BaseTest{
     public void addSongToPlaylist(){
-        openUrl();
         login();
         //createPlaylist();
         WebElement searchField = driver.findElement(By.cssSelector("input[type='search']"));

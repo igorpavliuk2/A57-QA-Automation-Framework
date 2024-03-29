@@ -13,7 +13,6 @@ public class HomeWork16 extends BaseTest {
     public void  registrationNavigation() {
 
 //      Added ChromeOptions argument below to fix websocket error
-        openUrl();
         WebElement registrationButton = driver.findElement(By.cssSelector("div>a[href='registration']"));
         registrationButton.click();
         WebElement registrationForm = driver.findElement((By.cssSelector("form[method='POST']")));
