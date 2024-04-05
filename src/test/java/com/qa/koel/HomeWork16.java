@@ -1,3 +1,5 @@
+package com.qa.koel;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,16 +9,16 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+
 @Test(description = "Test registration button")
 public class HomeWork16 extends BaseTest {
-
+    LoginPage loginPage;
     public void  registrationNavigation() {
-
+    loginPage = new LoginPage(getDriver());
 //      Added ChromeOptions argument below to fix websocket error
-        WebElement registrationButton = driver.findElement(By.cssSelector("div>a[href='registration']"));
-        registrationButton.click();
-        WebElement registrationForm = driver.findElement((By.cssSelector("form[method='POST']")));
-        Assert.assertTrue(registrationForm.isDisplayed());
+        loginPage.getRegistrationButton().click();
+        loginPage.getRegistrationForm();
+        Assert.assertTrue(loginPage.getRegistrationForm().isDisplayed());
     }
 
 }

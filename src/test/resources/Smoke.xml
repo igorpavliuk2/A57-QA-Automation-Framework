@@ -4,16 +4,9 @@
 <suite name="Smoke">
     <parameter name="BaseURL" value="https://qa.koel.app/">
     <test name="Smoke Test" preserve-order="false">
-        <classes>
-            <class name="HomeWork18">
-                    <methods>
-                        <include name="playSong"/>
-                    </methods>
-            </class>
-            <class name="HomeWork19"/>
-            <class name="HomeWork20"/>
-            <class name="HomeWork21"/>
-        </classes>
+        <packages>
+            <package name = "com.qa.koel"/>
+        </packages>
     </test>
     </parameter>
 </suite>

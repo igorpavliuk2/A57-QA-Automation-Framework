@@ -1,17 +1,18 @@
+package com.qa.koel;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import java.time.Duration;
 import org.testng.annotations.Test;
 @Test(description = "Test adding song to the playlist")
 public class HomeWork17 extends BaseTest{
     public void addSongToPlaylist(){
-        login();
-        //createPlaylist();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.enterLogin(email);
+        loginPage.enterPassword(password);
+        loginPage.clickSubmitButton();
         WebElement searchField = driver.findElement(By.cssSelector("input[type='search']"));
         searchField.click();
         searchField.sendKeys("Pluto");

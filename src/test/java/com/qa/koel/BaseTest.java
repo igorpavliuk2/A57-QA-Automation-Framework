@@ -1,3 +1,5 @@
+package com.qa.koel;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -15,12 +17,15 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.UUID;
 
 public class BaseTest {
     public WebDriver driver = null;
     public WebDriverWait wait = null;
     public String url = "https://qa.koel.app/";
+    public String email = "igor.pavliuk@testpro.io";
+    public String password = "1q2w3e4R";
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -45,14 +50,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    public void login(){
-        WebElement loginField = driver.findElement(By.cssSelector("input[type='email']"));
-        loginField.sendKeys("igor.pavliuk@testpro.io");
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        passwordField.sendKeys("1q2w3e4R");
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        submitButton.click();
-    }
+
     public String newNameGenerator(){
         String newName = UUID.randomUUID().toString();
         return newName;
@@ -81,4 +79,22 @@ public class BaseTest {
         return notification.getText();
 
     }
+    public void choosePlaylistByName (String playlistName) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'" + playlistName + "')]"))).click();
+    }
+
+    public int countSongs() {
+        return driver.findElements(By.cssSelector("section#playlistWrapper td.title")).size();
+    }
+    public String getPlaylistDetails() {
+        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
+    }
+    public void displayAllSongs() {
+        List<WebElement> songList = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
+        System.out.println("Number of songs found "+countSongs());
+        for (WebElement e : songList) {
+            System.out.println(e.getText());
+        }
+    }
+    public WebDriver getDriver() {return driver;}
 }
