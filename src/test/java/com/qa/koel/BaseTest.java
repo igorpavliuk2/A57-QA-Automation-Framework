@@ -52,22 +52,10 @@ public class BaseTest {
 
 
     public String newNameGenerator(){
-        String newName = UUID.randomUUID().toString();
-        return newName;
+        String newname = UUID.randomUUID().toString();
+        return newname;
     }
-    public void createPlaylist() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        WebElement createPlaylistButton = driver.findElement(By.cssSelector("h1>i[role='button']"));
-        createPlaylistButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/nav/ul/li[1]")));
-        WebElement newPlaylistElement = driver.findElement(By.xpath("//*[@id=\"playlists\"]/nav/ul/li[1]"));
-        newPlaylistElement.click();
-        WebElement playlistNameEmptyField = driver.findElement(By.cssSelector("form>input[name='name']"));
-        playlistNameEmptyField.click();
-        playlistNameEmptyField.sendKeys(newNameGenerator());
-        playlistNameEmptyField.sendKeys(Keys.ENTER);
 
-    }
     public void doubleClick(String locator){
         Actions dClick = new Actions(driver);
         WebElement dClickElement = driver.findElement(By.xpath(locator));
@@ -79,22 +67,6 @@ public class BaseTest {
         return notification.getText();
 
     }
-    public void choosePlaylistByName (String playlistName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'" + playlistName + "')]"))).click();
-    }
 
-    public int countSongs() {
-        return driver.findElements(By.cssSelector("section#playlistWrapper td.title")).size();
-    }
-    public String getPlaylistDetails() {
-        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
-    }
-    public void displayAllSongs() {
-        List<WebElement> songList = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
-        System.out.println("Number of songs found "+countSongs());
-        for (WebElement e : songList) {
-            System.out.println(e.getText());
-        }
-    }
     public WebDriver getDriver() {return driver;}
 }
