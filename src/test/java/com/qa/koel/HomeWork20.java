@@ -19,7 +19,7 @@ public class HomeWork20 extends BaseTest{
         PlaylistsPage playlistspage = new PlaylistsPage(getDriver());
         playlistspage.getDeletePlaylistButton().click();
         playlistspage.getOkButton().click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PlaylistsPage.SUCCESS_NOTIFICATION));
+        wait.until(ExpectedConditions.visibilityOf(playlistspage.successNotification));
         Assert.assertTrue(playlistspage.getSuccessNotification().isDisplayed());
 
 
