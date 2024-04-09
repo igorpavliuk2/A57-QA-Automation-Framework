@@ -12,7 +12,7 @@ public class PlaylistsPage extends BasePage{
     @FindBy (css = "button[class='ok']")
     WebElement okButton;
     //static final By OK_BUTTON = By.cssSelector("button[class='ok']");
-    @FindBy (css = "//div[contains(text(),'Deleted playlist')]")
+    @FindBy (css = "div[class='success show']")
     WebElement successNotification;
     //static final By SUCCESS_NOTIFICATION = By.xpath("//div[contains(text(),'Deleted playlist')]");
     public PlaylistsPage(WebDriver driver) {
