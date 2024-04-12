@@ -23,6 +23,7 @@ import org.testng.annotations.Parameters;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class BaseTest {
@@ -31,6 +32,7 @@ public class BaseTest {
     public String url = "https://qa.koel.app/";
     public String email = "igor.pavliuk@testpro.io";
     public String password = "1q2w3e4R";
+    private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
     @BeforeSuite
     static void setupClass() {
@@ -40,17 +42,18 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     @BeforeMethod
     public void setupDriver(String BaseURL) throws MalformedURLException  {
-        driver = pickDriver(System.getProperty("browserName"));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get(BaseURL);
+        threadDriver.set(pickDriver(System.getProperty("browserName")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().window().maximize();
+        getDriver().get(BaseURL);
 
 
     }
 
     @AfterMethod
-    public void closeBrowser() {
-        driver.quit();
+    public void tearDown() {
+        threadDriver.get().close();
+        threadDriver.remove();
     }
 
     public WebDriver pickDriver(String browserName) throws MalformedURLException {
@@ -71,6 +74,8 @@ public class BaseTest {
             case "grid-chrome":
                 capabilities.setCapability("browser", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), capabilities);
+            case "cloud":
+                return getLambdaDriver();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
@@ -86,8 +91,8 @@ public class BaseTest {
     }
 
     public void doubleClick(String locator) {
-        Actions dClick = new Actions(driver);
-        WebElement dClickElement = driver.findElement(By.xpath(locator));
+        Actions dClick = new Actions(getDriver());
+        WebElement dClickElement = getDriver().findElement(By.xpath(locator));
         dClick.doubleClick(dClickElement).perform();
 
     }
@@ -99,7 +104,24 @@ public class BaseTest {
     }
 
     public WebDriver getDriver() {
-        return driver;
+        return threadDriver.get();
+    }
+    public WebDriver getLambdaDriver () throws MalformedURLException {
+        String userName = "igor.pavliuk";
+        String authKey = "gcHjMzOxMR88LvKDJOIBwdQhgg6103wfCBDOsaMobzhDBt4M4V";
+        String hub = "@hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "Chrome");
+        capabilities.setCapability("browserVersion", "124.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", userName);
+        ltOptions.put("accessKey", authKey);
+        ltOptions.put("video", true);
+        ltOptions.put("platformName", "Windows 10");
+        ltOptions.put("project", "Koel");
+        capabilities.setCapability("LT:Options", ltOptions);
+        return new RemoteWebDriver(URI.create("https://" + userName + ":" + authKey + hub).toURL(),capabilities);
     }
 }
 

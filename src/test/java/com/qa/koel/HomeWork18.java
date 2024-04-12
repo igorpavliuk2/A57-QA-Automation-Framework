@@ -14,11 +14,11 @@ public class HomeWork18 extends BaseTest{
         loginPage.enterPassword(password);
         loginPage.clickSubmitButton();
         HomePage homepage = new HomePage(getDriver());
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homepage.getPlayNextSongButton().click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homepage.getPlayButton().click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homepage.getPlayerProgressBar();
         homepage.getPauseButton();
         Assert.assertTrue(homepage.getPauseButton().isDisplayed()&homepage.getPlayerProgressBar().isDisplayed());
