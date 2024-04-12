@@ -25,5 +25,6 @@ test {
     useTestNG() {
         //suites "src/test/resources/TestNG.xml"
         suites "src/test/resources/Smoke.xml"
+        systemProperty "browserName", System.getProperty("browserName")
     }
 }
