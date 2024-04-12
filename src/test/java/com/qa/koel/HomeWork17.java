@@ -13,20 +13,20 @@ public class HomeWork17 extends BaseTest{
         loginPage.enterLogin(email);
         loginPage.enterPassword(password);
         loginPage.clickSubmitButton();
-        WebElement searchField = driver.findElement(By.cssSelector("input[type='search']"));
+        WebElement searchField = getDriver().findElement(By.cssSelector("input[type='search']"));
         searchField.click();
         searchField.sendKeys("Pluto");
         searchField.sendKeys(Keys.ENTER);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        WebElement viewAllButton = driver.findElement(By.cssSelector("h1>button[data-test]"));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebElement viewAllButton = getDriver().findElement(By.cssSelector("h1>button[data-test]"));
         viewAllButton.click();
-        WebElement searchedSong = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/div/div/div[1]/table/tr/td[2]"));
+        WebElement searchedSong = getDriver().findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/div/div/div[1]/table/tr/td[2]"));
         searchedSong.click();
-        WebElement addToButton = driver.findElement(By.cssSelector("button[class='btn-add-to']"));
+        WebElement addToButton = getDriver().findElement(By.cssSelector("button[class='btn-add-to']"));
         addToButton.click();
-        WebElement playlistName = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[5]"));
+        WebElement playlistName = getDriver().findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[5]"));
         playlistName.click();
-        WebElement songAdded = driver.findElement(By.cssSelector("div[class='success show']"));
+        WebElement songAdded = getDriver().findElement(By.cssSelector("div[class='success show']"));
         Assert.assertEquals(songAdded.isDisplayed(),songAdded.isDisplayed());
 
         

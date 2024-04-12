@@ -9,8 +9,7 @@ public class LoginTests extends BaseTest {
 
 //      Added ChromeOptions argument below to fix websocket error
         getDriver().get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        getDriver().quit();
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 }
 //test hw15
