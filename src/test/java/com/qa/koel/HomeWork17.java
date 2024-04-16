@@ -18,7 +18,7 @@ public class HomeWork17 extends BaseTest{
         searchField.sendKeys("Pluto");
         searchField.sendKeys(Keys.ENTER);
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        WebElement viewAllButton = getDriver().findElement(By.cssSelector("h1>button[data-test]"));
+        WebElement viewAllButton = getDriver().findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[1]/h1/button"));
         viewAllButton.click();
         WebElement searchedSong = getDriver().findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/div/div/div[1]/table/tr/td[2]"));
         searchedSong.click();
