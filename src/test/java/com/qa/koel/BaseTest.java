@@ -31,6 +31,8 @@ public class BaseTest {
     public WebDriverWait wait;
     public String url = "https://qa.koel.app/";
     public String email = "igor.pavliuk@testpro.io";
+    public String wrongEmail = "";
+    public String wrongPassword = "";
     public String password = "1q2w3e4R";
     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
@@ -40,7 +42,8 @@ public class BaseTest {
     }
 
     //@Parameters({"BaseURL"})
-    //@BeforeMethod
+
+    @BeforeMethod
     public void setupDriver() throws MalformedURLException  {
         threadDriver.set(pickDriver(System.getProperty("browserName")));
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class HomeWork21 extends BaseTest {
+public class RenamePlaylistTest extends BaseTest {
     @Test(description = "Rename playlist test")
     public void renamePlaylist() {
         LoginPage loginPage = new LoginPage(getDriver());
@@ -21,8 +21,8 @@ public class HomeWork21 extends BaseTest {
         loginPage.enterLogin(email);
         loginPage.enterPassword(password);
         loginPage.clickSubmitButton();
-        doubleClick("//*[@id=\"playlists\"]/ul/li[3]/a");
-        WebElement playlistNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        doubleClick("//*[@id=\"playlists\"]/ul/li[4]/a");
+        WebElement playlistNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[data-testid='inline-playlist-name-input']")));
         playlistNameField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
         playlistNameField.sendKeys(newNameGenerator());
         playlistNameField.sendKeys(Keys.ENTER);
