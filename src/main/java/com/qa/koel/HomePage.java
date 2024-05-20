@@ -20,6 +20,8 @@ public class HomePage extends BasePage{
     WebElement progressBar;
     @FindBy (css = "li[class='playlist playlist']")
     WebElement playlist;
+    @FindBy (css = "a[href=\"/#!/profile\"]" )
+    WebElement profileIcon;
 
    // static final By PLAY_NEXT_SONG_BUTTON = By.cssSelector("i[data-testid='play-next-btn']");
    // static final By PLAY_BUTTON = By.cssSelector("span.play");

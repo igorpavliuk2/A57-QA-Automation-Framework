@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression">
+    <parameter name="BaseUrl" value="https://qa.koel.app/"/>
+    <test name="Regression test">
+        <classes>
+            <class name="com.qa.koel.AddSongToPlaylistTest"/>
+            <class name="com.qa.koel.DeletePlaylist2Test"/>
+            <class name="com.qa.koel.LoginTests"/>
+            <class name="com.qa.koel.PlaySongTest"/>
+            <class name="com.qa.koel.RegistrationButtonTest"/>
+            <class name="com.qa.koel.RenamePlaylistTest"/>
+        </classes>
+    </test>
+</suite>

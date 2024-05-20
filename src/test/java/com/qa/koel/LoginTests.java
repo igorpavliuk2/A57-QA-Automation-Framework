@@ -6,10 +6,22 @@ import org.testng.annotations.Test;
 public class LoginTests extends BaseTest {
     @Test
     public void loginEmptyEmailPassword() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homepage = new HomePage(loginPage.pageDriver);
+        loginPage.enterLogin(wrongEmail);
+        loginPage.enterPassword(wrongPassword);
+        loginPage.clickSubmitButton();
 
-//      Added ChromeOptions argument below to fix websocket error
-        getDriver().get(url);
-        Assert.assertEquals(getDriver().getCurrentUrl(), url);
+        Assert.assertTrue(loginPage.loginButton.isDisplayed());
+    }
+    @Test
+    public void loginCorrectEmailPassword() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homepage = new HomePage(loginPage.pageDriver);
+        loginPage.enterLogin(email);
+        loginPage.enterPassword(password);
+        loginPage.clickSubmitButton();
+
+        Assert.assertTrue(homepage.profileIcon.isDisplayed());
     }
 }
-//test hw15

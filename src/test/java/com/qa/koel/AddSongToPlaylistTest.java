@@ -7,7 +7,7 @@ import org.testng.Assert;
 import java.time.Duration;
 import org.testng.annotations.Test;
 @Test(description = "Test adding song to the playlist")
-public class HomeWork17 extends BaseTest{
+public class AddSongToPlaylistTest extends BaseTest{
     public void addSongToPlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.enterLogin(email);
