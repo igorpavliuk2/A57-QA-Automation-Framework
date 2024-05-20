@@ -36,12 +36,13 @@ public class BaseTest {
     public String password = "1q2w3e4R";
     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
-    @BeforeSuite
+    //@BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
 
     //@Parameters({"BaseURL"})
+
     @BeforeMethod
     public void setupDriver() throws MalformedURLException  {
         threadDriver.set(pickDriver(System.getProperty("browserName")));
@@ -52,7 +53,7 @@ public class BaseTest {
 
     }
 
-    @AfterMethod
+    //@AfterMethod
     public void tearDown() {
         threadDriver.get().close();
         threadDriver.remove();
@@ -87,7 +88,7 @@ public class BaseTest {
     }
 
 
-    public String newNameGenerator() {
+    public static String newNameGenerator() {
         String newname = UUID.randomUUID().toString();
         return newname;
     }
